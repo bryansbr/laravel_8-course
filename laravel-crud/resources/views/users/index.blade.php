@@ -1,13 +1,18 @@
 <!-- Extending from the base template -->
 @extends('layouts.base');
 
-<!-- Section -->
+<!-- Datatables section -->
+@section('css')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
+@endsection
+
+<!-- Content section -->
 @section('content')
-<div class="container">
-    <a href="/users/create" class="btn btn-primary">Create</a>
-    <div class="container">
-    <table class="table table-light table-striped mt-4">
-        <thead>
+<div class="container-fluid">
+    <a href="/users/create" class="btn btn-primary mb-3">Create</a>
+    <table id="show_users" class="table table-striped table-border table-responsive caption-top shadow-lg mt-2" style="width: 100%">
+        <caption>List of users</caption>
+        <thead class="bg-primary text-white">
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">First name</th>
@@ -32,19 +37,33 @@
                 <td>{{ $user->phone_number }}</td>
                 <td>{{ $user->email }}</td>
                 <td>
-                    <div class="container">
-                        <form action="{{ route('users.destroy', $user->id) }}" method="POST">
-                            <a href="/users/{{$user->id}}/edit" class="btn btn-info">Edit</a>
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger">Delete</button>
-                        </form>
-                    </div>
+                    <form action="{{ route('users.destroy', $user->id) }}" method="POST">
+                        <a href="/users/{{ $user->id }}/edit" title="Edit" class="btn btn-warning p-2">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger p-2" title="Delete">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </form>
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
-    </div>
 </div>
+<!-- Datatables JavaScript -->
+@section('js')
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>   
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>    
+<script>
+    $(document).ready(function() {
+        $('#show_users').DataTable({
+            'lengthMenu': [[5, 10, 50, -1], [5, 10, 50, "All"]]
+        });
+    }); 
+</script>
+@endsection
 @endsection

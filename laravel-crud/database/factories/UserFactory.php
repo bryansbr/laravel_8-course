@@ -21,7 +21,7 @@ class UserFactory extends Factory
             'first_name' => $this->faker->unique()->firstName($gender = 'male'|'female'),
             'last_name' => $this->faker->unique()->lastName(),
             'age' => $this->faker->numberBetween($min = 18, $max = 60),
-            'gender' => $this->faker->randomElement(['M', 'F']),
+            'gender' => $this->faker->randomElement(['M', 'F', 'O']),
             'country' => $this->faker->country(),
             'phone_number' => $this->faker->unique()->tollFreePhoneNumber(),
             'email' => $this->faker->unique()->freeEmail()

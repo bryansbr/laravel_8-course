@@ -4,36 +4,54 @@
 <!-- Section -->
 @section('content')
 <div class="container">
-    <h1>Create User</h1>
+    <h3>Create User</h3>
     <form action="/users" method="POST">
     @csrf
       <!-- First name -->
       <div class="mb-3">
-        <input id="first_name" name="first_name" type="text" class="form-control" tabindex="1" placeholder="First name" autofocus/>
+        <label for="" class="fw-bold form-label mt-4">First name</label>
+        <input id="first_name" name="first_name" type="text" class="form-control" tabindex="1" autofocus/>
       </div>
       <!-- Last name -->
       <div class="mb-3">
-        <input id="last_name" name="last_name" type="text" class="form-control" tabindex="2" placeholder="Last name"/>
+        <label for="" class="fw-bold form-label">Last name</label>
+        <input id="last_name" name="last_name" type="text" class="form-control" tabindex="2"/>
       </div>
       <!-- Age -->
       <div class="mb-3">
-        <input id="age" name="age" type="number" class="form-control" tabindex="3" placeholder="Age"/>
+        <label for="" class="fw-bold form-label">Age</label>
+        <input id="age" name="age" type="number" class="form-control" tabindex="3"/>
       </div>
       <!-- Gender -->
       <div class="mb-3">
-        <input id="gender" name="gender" type="text" class="form-control" tabindex="4" placeholder="Gender"/>
+        <label for="" class="fw-bold form-label">Gender</label>
+        <select name="gender" class="form-select" tabindex="4">
+          <option value="">-- Select a gender --</option>
+          @foreach ($genders as $gender)
+            <option value="{{ $gender }}">{{ $gender }}</option>
+          @endforeach
+        </select>
       </div>
       <!-- Country -->
       <div class="mb-3">
-        <input id="country" name="country" type="text" class="form-control" tabindex="5" placeholder="Country"/>
+        <label for="" class="fw-bold form-label">Country</label>
+        <select name="country" class="form-select" tabindex="5">
+          <option value="">-- Select a country --</option>
+          @foreach ($countries as $country)
+            <option value="{{ $country['id'] }}">{{ $country['name'] }}</option>
+            {{-- <option value="{{ $country['id'] }}" {{ ($country['id'] == old('country')) ? 'selected' : '' }}>{{ $country['nombre'] }}</option> --}}
+          @endforeach
+        </select>
       </div>
       <!-- Phone number -->
       <div class="mb-3">
-        <input id="phone_number" name="phone_number" type="text" class="form-control" tabindex="6" placeholder="Phone number"/>
+        <label for="" class="fw-bold form-label">Phone number</label>
+        <input id="phone_number" name="phone_number" type="text" class="form-control" tabindex="6"/>
       </div>
       <!-- Email -->
       <div class="mb-3">
-        <input id="email" name="email" type="text" class="form-control" tabindex="7" placeholder="Email"/>
+        <label for="" class="fw-bold form-label">Email</label>
+        <input id="email" name="email" type="text" class="form-control" tabindex="7"/>
       </div>
       <a href="/users" class="btn btn-secondary" tabindex="8">Cancel</a>
       <button type="submit" class="btn btn-primary" tabindex="9">Submit</button>

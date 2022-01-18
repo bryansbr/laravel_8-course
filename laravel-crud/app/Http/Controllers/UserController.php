@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Country;
 
 class UserController extends Controller
 {
@@ -25,7 +26,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $genders = ['M', 'F', 'Other'];
+        $countries = Country::all();
+        return view('users.create', compact('genders', 'countries'));
     }
 
     /**
@@ -68,7 +71,9 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view('users.edit')->with('user', $user);
+        $genders = ['M', 'F', 'Other'];
+        $countries = Country::all();
+        return view('users.edit', compact('genders', 'countries'))->with('user', $user);
     }
 
     /**
