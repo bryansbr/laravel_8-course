@@ -39,7 +39,7 @@
         <select name="country" class="form-select" tabindex="5">
           <option value="{{ $user->country }}">-- Select a country --</option>
           @foreach ($countries as $country)
-            <option value="{{ $country['id'] }}">{{ $country['name'] }}</option>
+            <option value="{{ $country['name'] }}">{{ $country['name'] }}</option>
           @endforeach
         </select>
       </div>
