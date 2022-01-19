@@ -43,19 +43,22 @@ class PeopleController extends Controller
      */
     public function store(CreatePeopleRequest $request)
     {
-        $people = new People();
+        // $people = new People();
 
-        $people->first_name = $request->get("first_name");
-        $people->last_name = $request->get("last_name");
-        $people->age = $request->get("age");
-        $people->gender = $request->get("gender");
-        $people->country = $request->get("country");
-        $people->phone_number = $request->get("phone_number");
-        $people->email = $request->get("email");
+        // $people->first_name = $request->get("first_name");
+        // $people->last_name = $request->get("last_name");
+        // $people->age = $request->get("age");
+        // $people->gender = $request->get("gender");
+        // $people->country = $request->get("country");
+        // $people->phone_number = $request->get("phone_number");
+        // $people->email = $request->get("email");
 
-        $people->save();
+        // $people->save();
 
-        return redirect("/people")->with("success", "User created successfully!");
+        $people = People::create($request->all());
+
+        // return redirect("/people")->with("success", "User created successfully!");
+        return redirect()->route("people.index", $people)->with("success", "User created successfully!");
     }
 
     /**
@@ -91,21 +94,23 @@ class PeopleController extends Controller
      * @param  \App\Models\People  $people
      * @return \Illuminate\Http\Response
      */
-    public function update(EditPeopleRequest $request, $id)
+    public function update(EditPeopleRequest $request, People $p, $id)
     {
         $p = People::find($id);
 
-        $p->first_name = $request->get("first_name");
-        $p->last_name = $request->get("last_name");
-        $p->age = $request->get("age");
-        $p->gender = $request->get("gender");
-        $p->country = $request->get("country");
-        $p->phone_number = $request->get("phone_number");
-        $p->email = $request->get("email");
+        // $p->first_name = $request->get("first_name");
+        // $p->last_name = $request->get("last_name");
+        // $p->age = $request->get("age");
+        // $p->gender = $request->get("gender");
+        // $p->country = $request->get("country");
+        // $p->phone_number = $request->get("phone_number");
+        // $p->email = $request->get("email");
 
-        $p->save();
+        // $p->save();
 
-        return redirect("/people");
+        $p->update($request->all());
+
+        return redirect()->route("people.index");
     }
 
     /**
@@ -116,12 +121,9 @@ class PeopleController extends Controller
      */
     public function destroy($id)
     {
-        //with("confirm", "Sure?");
         $p = People::find($id);
-
-
         $p->delete();
 
-        return redirect("/people");
+        return redirect()->route("people.index");
     }
 }
