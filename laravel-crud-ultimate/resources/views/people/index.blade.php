@@ -8,12 +8,29 @@
 
 <!-- Content section -->
 @section('content')
-    <!-- Messages for fields validated -->
-    @if (Session::has('success'))
+    <!-- Message for user created -->
+    @if (Session::has('success_created'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ Session::get('success') }}
+            {{ Session::get('success_created') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
+    @endif
+    <!-- Message for user edited -->
+    @if (Session::has('success_edited'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ Session::get('success_edited') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+    <!-- Message for user removed -->
+    @if (Session::has('success_removed'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ Session::get('success_removed') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {{-- <script>
+            alert("yes")
+        </script> --}}
     @endif
     <div class="container-fluid">
         <a href="/people/create" class="btn btn-primary mb-3">Create</a>
@@ -44,8 +61,28 @@
                         <td>{{ $p->country }}</td>
                         <td>{{ $p->phone_number }}</td>
                         <td>{{ $p->email }}</td>
-                        <td>
-                            <form action="{{ route('people.destroy', $p->id) }}" method="POST" class="">
+                        <td width="138px">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <a href="/people/{{ $p->id }}/edit" title="Edit"
+                                            class="btn btn-warning p-2">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <form action="{{ route('people.destroy', $p->id) }}" method="POST"
+                                            class="confirm-delete">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger p-2" title="Delete">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- <form action="{{ route('people.destroy', $p->id) }}" method="POST" class="">
                                 <a href="/people/{{ $p->id }}/edit" title="Edit" class="btn btn-warning p-2">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
@@ -54,21 +91,7 @@
                                 <button class="btn btn-danger p-2" title="Delete">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
-                            </form>
-                            {{-- <div>
-                                <form action="{{ route('people.destroy', $p->id) }}" method="POST" class="confirm-delete">
-                                    <a href="/people/{{ $p->id }}/edit" title="Edit" class="btn btn-warning p-2">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </a>
-                                </form>
-                                <form action="{{ route('people.destroy', $p->id) }}" method="POST" class="confirm-delete">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger p-2" title="Delete">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </button>
-                                </form>
-                            </div> --}}
+                            </form> --}}
                         </td>
                     </tr>
                 @endforeach
@@ -91,18 +114,33 @@
             });
         });
     </script>
-
-    <script type="text/javascript">
-        $('#confirm-delete').submit((e) => {
+    <script>
+        $('.confirm-delete').submit(function(e) {
             e.preventDefault();
-            // alert({{ Session::get('confirm') }}).then((result) => {
-            //     if (result.isConfirmed) {
+            // alert("Sure?").then((result) => {
+            //     if (result.value) {
             //         this.submit();
             //     }
-            // })
-        })
+            // });
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                    // Swal.fire(
+                    //     'Deleted!',
+                    //     'Your file has been deleted.',
+                    //     'success'
+                    // )
+                }
+            })
+        });
     </script>
-
-
 @endsection
 @endsection

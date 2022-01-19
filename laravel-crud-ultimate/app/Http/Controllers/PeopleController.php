@@ -15,6 +15,8 @@ class PeopleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    // Retrieve and load home view.
     public function index(Request $request)
     {
         $people = People::all();
@@ -27,10 +29,12 @@ class PeopleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    // Retrieve and load the people creation view.
     public function create()
     {
-        $genders = ["M", "F", "Other"];
-        $countries = Country::all();
+        $genders = ["M", "F", "Other"]; // Array of genders.
+        $countries = Country::all(); // Retrieves data from countries table in DB.
 
         return view("people.create", compact("genders", "countries"));
     }
@@ -41,6 +45,8 @@ class PeopleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    // Retrieves data from DB via 'Request' and saves them
     public function store(CreatePeopleRequest $request)
     {
         // $people = new People();
@@ -57,8 +63,7 @@ class PeopleController extends Controller
 
         $people = People::create($request->all());
 
-        // return redirect("/people")->with("success", "User created successfully!");
-        return redirect()->route("people.index", $people)->with("success", "User created successfully!");
+        return redirect()->route("people.index", $people)->with("success_created", "User created successfully!");
     }
 
     /**
@@ -67,6 +72,7 @@ class PeopleController extends Controller
      * @param  \App\Models\People  $people
      * @return \Illuminate\Http\Response
      */
+
     public function show(People $people)
     {
         //
@@ -78,6 +84,8 @@ class PeopleController extends Controller
      * @param  \App\Models\People  $people
      * @return \Illuminate\Http\Response
      */
+
+    // Shows the data that is being loaded from the DB.
     public function edit($id)
     {
         $p = People::find($id);
@@ -94,6 +102,8 @@ class PeopleController extends Controller
      * @param  \App\Models\People  $people
      * @return \Illuminate\Http\Response
      */
+
+    // Retrieves data from DB via 'Request' and update them.
     public function update(EditPeopleRequest $request, People $p, $id)
     {
         $p = People::find($id);
@@ -110,7 +120,7 @@ class PeopleController extends Controller
 
         $p->update($request->all());
 
-        return redirect()->route("people.index");
+        return redirect()->route("people.index")->with("success_edited", "User edited successfully!");
     }
 
     /**
@@ -119,11 +129,13 @@ class PeopleController extends Controller
      * @param  \App\Models\People  $people
      * @return \Illuminate\Http\Response
      */
+
+    // Retrieves data from DB and delete them.
     public function destroy($id)
     {
         $p = People::find($id);
         $p->delete();
 
-        return redirect()->route("people.index");
+        return redirect()->route("people.index")->with("success_removed", "User removed successfully!");
     }
 }

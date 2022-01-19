@@ -47,7 +47,7 @@
             <div class="mb-3">
                 <label for="" class=" form-label">Gender</label>
                 <select name="gender" class="form-select @error('gender') is-invalid @enderror" tabindex="4">
-                    <option value="{{ $p->gender }}">-- Select a gender --</option>
+                    <option value="{{ $p->gender }}">{{ $p->gender }}</option>
                     @foreach ($genders as $gender)
                         {{-- <option value="{{ $gender }}">{{ $gender }}</option> --}}
                         <option value="{{ $gender }}" {{ $gender == old('gender') ? 'selected' : '' }}>
@@ -64,7 +64,7 @@
             <div class="mb-3">
                 <label for="" class=" form-label">Country</label>
                 <select name="country" class="form-select @error('country') is-invalid @enderror" tabindex="5">
-                    <option value="{{ $p->country }}">-- Select a country --</option>
+                    <option value="{{ $p->country }}">{{ $p->country }}</option>
                     @foreach ($countries as $country)
                         {{-- <option value="{{ $country['name'] }}">{{ $country['name'] }}</option> --}}
                         <option value="{{ $country['name'] }}"

@@ -18,10 +18,10 @@ class PeopleFactory extends Factory
     public function definition()
     {
         return [
-            'first_name' => $this->faker->unique()->firstName($gender = 'male'|'female'),
+            'first_name' => $this->faker->unique()->firstName($gender = 'male' | 'female'),
             'last_name' => $this->faker->unique()->lastName(),
             'age' => $this->faker->numberBetween($min = 18, $max = 60),
-            'gender' => $this->faker->randomElement(['M', 'F', 'O']),
+            'gender' => $this->faker->randomElement(['M', 'F', 'Other']),
             'country' => $this->faker->country(),
             'phone_number' => $this->faker->unique()->tollFreePhoneNumber(),
             'email' => $this->faker->unique()->freeEmail()
