@@ -21,7 +21,7 @@ class CreatePeopleTable extends Migration
             $table->string('gender', 3);
             $table->string('country', 50);
             $table->string('phone_number', 30);
-            $table->string('email', 50)->unique();
+            $table->string('email', 50);
             $table->timestamps();
         });
     }
