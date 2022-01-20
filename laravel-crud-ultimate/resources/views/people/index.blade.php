@@ -33,7 +33,7 @@
         </script> --}}
     @endif
     <div class="container-fluid">
-        <a href="/people/create" class="btn btn-primary mb-3">Create</a>
+        <a href="{{ url('/people/create') }}" class="btn btn-primary mb-3">Create</a>
         <table id="show_people" class="table table-striped table-border table-responsive caption-top shadow-lg mt-2"
             style="width: 100%">
             <caption>List of users</caption>
@@ -65,6 +65,7 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-sm-4">
+
                                         <a href="/people/{{ $p->id }}/edit" title="Edit"
                                             class="btn btn-warning p-2">
                                             <i class="fa-solid fa-pen-to-square"></i>

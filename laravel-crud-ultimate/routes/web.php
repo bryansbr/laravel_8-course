@@ -22,4 +22,4 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::resource('people', PeopleController::class);
+Route::resource('/people', PeopleController::class);

@@ -4,7 +4,7 @@
 @section('content')
     <div class="container">
         <h3>Create User</h3>
-        <form action="/people" method="POST" class="needs-validation" novalidate>
+        <form action="{{ url('/people') }}" method="POST" class="needs-validation" novalidate>
             @csrf
             <!-- First name -->
             <div class="mb-3">
