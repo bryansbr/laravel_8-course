@@ -24,33 +24,26 @@ class EditPeopleRequest extends FormRequest
     public function rules()
     {
         return [
-            // First name
             "first_name" => "required | max:50",
-            "first_name.max" => "The entered data exceeds the limit of allowed characters",
-
-            // Last name
             "last_name" => "required | max:50",
-            "last_name.max" => "The entered data exceeds the limit of allowed characters",
-
-            // Age
             "age" => "required | numeric | min:1 | max:120",
+            "gender" => "required",
+            "country" => "required",
+            "phone_number" => "required | min:3 | max:15",
+            "email" => "required | email"
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            "first_name.max" => "The entered data exceeds the limit of allowed characters",
+            "last_name.max" => "The entered data exceeds the limit of allowed characters",
             "age.numeric" => "The data must be numeric",
             "age.min" => "The age can't be less than 1.",
             "age.max" => "The age can't be greater than 120.",
-
-            // Gender
-            "gender" => "required",
-
-            // Country
-            "country" => "required",
-
-            // Phone number
-            "phone_number" => "required | min:3 | max:15",
             "phone_number.min" => "The phone number can't be less than 3 digits.",
             "phone_number.max" => "The phone number can't be greater than 15 digits.",
-
-            // Email
-            "email" => "required | email",
         ];
     }
 }

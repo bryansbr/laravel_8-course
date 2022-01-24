@@ -49,6 +49,16 @@ class PeopleController extends Controller
     // Retrieves data from DB via 'Request' and saves them
     public function store(CreatePeopleRequest $request)
     {
+        // $request->validate([
+        //     'first_name'=> 'required',
+        //     "last_name" => "required | max:50",
+        //     "age" => "required | numeric | min:1 | max:120",
+        //     "gender" => "required",
+        //     "country" => "required",
+        //     "phone_number" => "required | min:3 | max:15",
+        //     "email" => "required | email | unique:people"
+        // ]);
+
         // $people = new People();
 
         // $people->first_name = $request->get("first_name");
@@ -61,9 +71,10 @@ class PeopleController extends Controller
 
         // $people->save();
 
-        $people = People::create($request->all());
+        //$people = People::create($request->all());
+        People::create($request->all());
 
-        return redirect()->route("people.index", $people)->with("success_created", "User created successfully!");
+        return redirect()->route("people.index")->with("success_created", "User created successfully!");
     }
 
     /**
@@ -106,6 +117,16 @@ class PeopleController extends Controller
     // Retrieves data from DB via 'Request' and update them.
     public function update(EditPeopleRequest $request, People $p, $id)
     {
+        // $request->validate([
+        //     "first_name" => "required",
+        //     "last_name" => "required | max:50",
+        //     "age" => "required | numeric | min:1 | max:120",
+        //     "gender" => "required",
+        //     "country" => "required",
+        //     "phone_number" => "required | min:3 | max:15",
+        //     "email" => "required | email | unique:people"
+        // ]);
+
         $p = People::find($id);
 
         // $p->first_name = $request->get("first_name");

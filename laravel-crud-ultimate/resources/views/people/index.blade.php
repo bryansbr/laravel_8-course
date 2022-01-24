@@ -61,7 +61,7 @@
                         <td>{{ $p->country }}</td>
                         <td>{{ $p->phone_number }}</td>
                         <td>{{ $p->email }}</td>
-                        <td width="138px">
+                        <td width="138">
                             <div class="container">
                                 <div class="row">
                                     <div class="col-sm-4">
