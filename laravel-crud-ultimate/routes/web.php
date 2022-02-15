@@ -15,11 +15,11 @@ use App\Http\Controllers\PeopleController; // Calling the controller.
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard.index');
 })->name('dashboard');
 
 Route::resource('/people', PeopleController::class);
