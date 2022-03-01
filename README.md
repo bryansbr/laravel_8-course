@@ -17,23 +17,36 @@ git clone https://github.com/bryansbr/laravel_8-course.git
 ```
 code .
 ```
-3. Open the terminal, download the NodeJS dependencies and execute project in developer mode:
+3. Download the NodeJS dependencies and execute the project in developer mode:
 ```
 npm i && npm run dev
 ```
-4. Open XAMPP and create the database in the shell:
+4. Download the Laravel dependencies via Composer:
+```
+composer install
+```
+5. Rebuild `.env` file from `.env.example` file and generate key:
+```
+cp .env.example .env
+php artisan key:generate
+```
+6. Modify the database name in the `.env` file:
+```
+DB_DATABASE=users_crud_laravel
+```
+7. Open XAMPP and create the database in the shell:
 ```
 mysql -u root -h localhost -p
 CREATE DATABASE users_crud_laravel;
 ```
-5. Create the table `countries` in the database via the SQL script in the folder `database/script`.
-
-6. Run the Laravel migrations:
+8. Run the Laravel migrations:
 ```
 php artisan migrate
 ```
-7. In a new terminal, execute the Laravel server:
+9. Create the table `countries` in the database via the SQL script in the folder `database/script`.
+
+10. In a new terminal, execute the Laravel server:
 ```
 php artisan serve
 ```
-
+_¡Enjoy the application!_
