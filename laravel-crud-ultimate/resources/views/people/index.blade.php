@@ -1,12 +1,12 @@
-<!-- Extending from the base template -->
-@extends('layouts.base');
+{{-- Dashboard view --}}
+@extends('adminlte::page')
 
-<!-- Datatables section -->
-@section('css')
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
-@endsection
+@section('title', 'Laravel 8 CRUD')
 
-<!-- Content section -->
+@section('content_header')
+    <h1>Dashboard</h1>
+@stop
+
 @section('content')
     <!-- Message for user created -->
     @if (Session::has('success_created'))
@@ -28,15 +28,12 @@
             {{ Session::get('success_removed') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-        {{-- <script>
-            alert("yes")
-        </script> --}}
     @endif
     <div class="container-fluid">
         <a href="{{ url('/people/create') }}" class="btn btn-primary mb-3">Create</a>
         <table id="show_people" class="table table-striped table-border table-responsive caption-top shadow-lg mt-2"
             style="width: 100%">
-            <caption>List of users</caption>
+            {{-- <caption>List of users</caption> --}}
             <thead class="bg-primary text-white">
                 <tr>
                     <th scope="col">ID</th>
@@ -83,28 +80,26 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- <form action="{{ route('people.destroy', $p->id) }}" method="POST" class="">
-                                <a href="/people/{{ $p->id }}/edit" title="Edit" class="btn btn-warning p-2">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </a>
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger p-2" title="Delete">
-                                    <i class="fa-solid fa-trash"></i>
-                                </button>
-                            </form> --}}
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
-    <!-- Datatables JavaScript -->
+@stop
+
+@section('css')
+    <!-- Datatables implementation -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
+@stop
+
 @section('js')
+    <!-- JavaScript implementation -->
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Show data rows -->
     <script>
         $(document).ready(function() {
             $('#show_people').DataTable({
@@ -115,14 +110,10 @@
             });
         });
     </script>
+    <!-- Delete alert implementation -->
     <script>
         $('.confirm-delete').submit(function(e) {
             e.preventDefault();
-            // alert("Sure?").then((result) => {
-            //     if (result.value) {
-            //         this.submit();
-            //     }
-            // });
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -134,14 +125,8 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     this.submit();
-                    // Swal.fire(
-                    //     'Deleted!',
-                    //     'Your file has been deleted.',
-                    //     'success'
-                    // )
                 }
             })
         });
     </script>
-@endsection
-@endsection
+@stop

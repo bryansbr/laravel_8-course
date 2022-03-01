@@ -1,10 +1,13 @@
-<!-- Extending from the base template -->
-@extends('layouts.base');
+@extends('adminlte::page')
 
-<!-- Section -->
+@section('title', 'Laravel 8 CRUD')
+
+@section('content_header')
+    <h1>Edit User</h1>
+@stop
+
 @section('content')
     <div class="container">
-        <h3>Edit User</h3>
         <form action="/people/{{ $p->id }}" method="POST" class="needs-validation" novalidate>
             @csrf
             @method('PUT')
@@ -45,8 +48,8 @@
             </div>
             <!-- Gender -->
             <div class="mb-3">
-                <label for="" class=" form-label">Gender</label>
-                <select name="gender" class="form-select @error('gender') is-invalid @enderror" tabindex="4">
+                <label for="" class=" form-label">Gender</label><br>
+                <select name="gender" class="form-select col-md-3 @error('gender') is-invalid @enderror" tabindex="4">
                     <option value="{{ $p->gender }}">{{ $p->gender }}</option>
                     @foreach ($genders as $gender)
                         {{-- <option value="{{ $gender }}">{{ $gender }}</option> --}}
@@ -62,11 +65,10 @@
             </div>
             <!-- Country -->
             <div class="mb-3">
-                <label for="" class=" form-label">Country</label>
-                <select name="country" class="form-select @error('country') is-invalid @enderror" tabindex="5">
+                <label for="" class=" form-label">Country</label><br>
+                <select name="country" class="form-select col-md-3 @error('country') is-invalid @enderror" tabindex="5">
                     <option value="{{ $p->country }}">{{ $p->country }}</option>
                     @foreach ($countries as $country)
-                        {{-- <option value="{{ $country['name'] }}">{{ $country['name'] }}</option> --}}
                         <option value="{{ $country['name'] }}"
                             {{ $country['name'] == old('country') ? 'selected' : '' }}>
                             {{ $country['name'] }}</option>
@@ -105,4 +107,12 @@
             <button type="submit" class="btn btn-primary" tabindex="9">Submit</button>
         </form>
     </div>
-@endsection
+@stop
+
+@section('css')
+    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+@stop
+
+@section('js')
+    {{-- <script> console.log('Hi!'); </script> --}}
+@stop

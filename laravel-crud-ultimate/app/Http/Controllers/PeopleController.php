@@ -10,6 +10,13 @@ use App\Http\Requests\EditPeopleRequest;
 
 class PeopleController extends Controller
 {
+
+    // Constructor to control access to routes
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
