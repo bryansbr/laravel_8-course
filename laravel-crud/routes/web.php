@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController; // Calling the controller.
+use App\Http\Controllers\PeopleController; // Calling the controller.
 
 /*
 |--------------------------------------------------------------------------
@@ -15,14 +15,11 @@ use App\Http\Controllers\UserController; // Calling the controller.
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard.index');
 })->name('dashboard');
 
-// Routes to manipulate the CRUD.
-Route::resource('users', UserController::class);
-
-
+Route::resource('/people', PeopleController::class);
